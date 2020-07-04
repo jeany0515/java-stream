@@ -3,10 +3,16 @@ package com.thoughtworks.collection;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Add {
     public int getSumOfEvens(int leftBorder, int rightBorder) {
-        throw new NotImplementedException();
+        int sum = 0;
+
+        for(int i = Math.min(leftBorder, rightBorder); i<=Math.max(leftBorder, rightBorder); i++) {
+            if (i%2 == 0) sum = sum + i;
+        }
+        return sum;
     }
 
     public int getSumOfOdds(int leftBorder, int rightBorder) {
@@ -14,11 +20,11 @@ public class Add {
     }
 
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        return arrayList.stream().map(e -> e*3 + 2).mapToInt(Integer::intValue).sum();
     }
 
     public List<Integer> getTripleOfOddAndAddTwo(List<Integer> arrayList) {
-        throw new NotImplementedException();
+       return arrayList.stream().map(e -> e%2 == 0 ? e : e*3 + 2).collect(Collectors.toList());
     }
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
@@ -30,7 +36,7 @@ public class Add {
 //    }
 
     public double getAverageOfEven(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        return arrayList.stream().filter( e -> e%2 == 0 ).mapToInt(Integer::intValue).average().orElse(0.0);
     }
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
@@ -38,7 +44,7 @@ public class Add {
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        return  arrayList.stream().filter(e -> e%2 == 0).distinct().collect(Collectors.toList());
     }
 
 //    public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
